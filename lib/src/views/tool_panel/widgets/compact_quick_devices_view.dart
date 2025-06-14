@@ -1,5 +1,6 @@
 import 'package:device_preview_plus/device_preview_plus.dart';
 import 'package:device_preview_plus/src/views/tool_panel/widgets/theme_toggle.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -127,7 +128,7 @@ class CompactQuickDevicesView extends StatelessWidget {
                             !store.data.quickDeviceTools,
                       );
                       return CompactDeviceIcon(
-                        icon: Icons.phone_android_outlined,
+                        icon: CupertinoIcons.device_desktop,
                         isSelected: isNoDeviceSelected,
                         onTap: () {
                           final state = context.read<DevicePreviewStore>();
