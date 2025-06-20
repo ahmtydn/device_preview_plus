@@ -208,9 +208,12 @@ class CompactQuickDevicesView extends StatelessWidget {
                         }
 
                         return CompactDeviceIcon(
-                          icon: orientation == Orientation.portrait
-                              ? CupertinoIcons.rotate_right
-                              : CupertinoIcons.rotate_left,
+                          icon: Icons.screen_rotation,
+                          duration: const Duration(milliseconds: 200),
+                          transformAlignment: Alignment.center,
+                          transform: Matrix4.rotationZ(
+                            orientation == Orientation.landscape ? 2.35 : 0.75,
+                          ),
                           isSelected: false,
                           onTap: () {
                             final state = context.read<DevicePreviewStore>();

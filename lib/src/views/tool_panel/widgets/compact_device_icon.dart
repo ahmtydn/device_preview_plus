@@ -29,6 +29,9 @@ class CompactDeviceIcon extends StatelessWidget {
     required this.icon,
     required this.isSelected,
     required this.onTap,
+    this.duration,
+    this.transformAlignment,
+    this.transform,
   });
 
   /// The icon to display.
@@ -49,14 +52,22 @@ class CompactDeviceIcon extends StatelessWidget {
   /// It should handle the device selection logic.
   final VoidCallback onTap;
 
+  final Duration? duration;
+
+  final AlignmentGeometry? transformAlignment;
+
+  final Matrix4? transform;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
+      duration: duration ?? const Duration(milliseconds: 200),
       width: 40,
       height: 40,
+      alignment: transformAlignment,
+      transform: transform,
       decoration: BoxDecoration(
         color: isSelected
             ? theme.colorScheme.primary.withOpacity(0.1)
