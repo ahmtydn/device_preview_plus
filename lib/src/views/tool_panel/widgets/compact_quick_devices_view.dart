@@ -151,45 +151,6 @@ class CompactQuickDevicesView extends StatelessWidget {
                       );
                     },
                   ),
-                  const SizedBox(height: 8),
-                  // Quick devices
-                  ...quickDevices.expand(
-                    (device) => [
-                      Builder(
-                        builder: (context) {
-                          final currentDeviceId = context.select(
-                            (DevicePreviewStore store) =>
-                                store.deviceInfo.identifier,
-                          );
-                          final isSelected =
-                              currentDeviceId == device.identifier &&
-                                  context.select(
-                                    (DevicePreviewStore store) =>
-                                        store.data.quickDeviceTools,
-                                  );
-
-                          return CompactDeviceIcon(
-                            icon: _getDeviceIcon(device),
-                            isSelected: isSelected,
-                            onTap: () {
-                              final state = context.read<DevicePreviewStore>();
-                              state.selectDevice(device.identifier);
-                              state.data = state.data.copyWith(
-                                quickDeviceTools: true,
-                              );
-                              if (showToast) {
-                                _showDeviceToast(
-                                  context,
-                                  '${device.name} (${device.identifier.name})',
-                                );
-                              }
-                            },
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 8),
-                    ],
-                  ),
                   // Orientation toggle (if enabled and device supports it)
                   if (showOrientationToggle) ...[
                     Builder(
@@ -230,6 +191,45 @@ class CompactQuickDevicesView extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                   ],
+                  const SizedBox(height: 8),
+                  // Quick devices
+                  ...quickDevices.expand(
+                    (device) => [
+                      Builder(
+                        builder: (context) {
+                          final currentDeviceId = context.select(
+                            (DevicePreviewStore store) =>
+                                store.deviceInfo.identifier,
+                          );
+                          final isSelected =
+                              currentDeviceId == device.identifier &&
+                                  context.select(
+                                    (DevicePreviewStore store) =>
+                                        store.data.quickDeviceTools,
+                                  );
+
+                          return CompactDeviceIcon(
+                            icon: _getDeviceIcon(device),
+                            isSelected: isSelected,
+                            onTap: () {
+                              final state = context.read<DevicePreviewStore>();
+                              state.selectDevice(device.identifier);
+                              state.data = state.data.copyWith(
+                                quickDeviceTools: true,
+                              );
+                              if (showToast) {
+                                _showDeviceToast(
+                                  context,
+                                  '${device.name} (${device.identifier.name})',
+                                );
+                              }
+                            },
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 8),
+                    ],
+                  ),
                 ],
               ),
             ],
