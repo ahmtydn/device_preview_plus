@@ -55,6 +55,7 @@ class DevicePreview extends StatefulWidget {
     this.onThemeChanged,
     this.initialDarkMode,
     List<DeviceInfo>? quickDevices,
+    this.showOrientationToggle = true,
   }) : quickDevices = quickDevices ?? Devices.all;
 
   /// If not [enabled], the [child] is used directly.
@@ -168,7 +169,11 @@ class DevicePreview extends StatefulWidget {
   /// All the default available devices.
   static final List<DeviceInfo> defaultDevices = Devices.all;
 
+  /// Quick devices that are available for quick selection.
   final List<DeviceInfo> quickDevices;
+
+  /// Whether to show the orientation toggle button in the toolbar.
+  final bool showOrientationToggle;
 
   /// All the default tools included in the menu : [DeviceSection], [SystemSection],
   /// [AccessibilitySection] and [SettingsSection].
@@ -330,10 +335,7 @@ class DevicePreview extends StatefulWidget {
     BuildContext context,
   ) {
     final store = Provider.of<DevicePreviewStore>(context, listen: false);
-    return store.devices
-        .where((info) => info != null)
-        .map((info) => info.identifier)
-        .toList();
+    return store.devices.map((info) => info.identifier).toList();
   }
 
   /// All available locales in the tool.
@@ -661,6 +663,8 @@ class DevicePreviewWidgetState extends State<DevicePreview> {
                                     widget.enableQuickDevicesTools,
                                 showToast: widget.showToast,
                                 showThemeToggle: widget.showThemeToggle,
+                                showOrientationToggle:
+                                    widget.showOrientationToggle,
                               ),
                             ),
                           AnimatedPositioned(

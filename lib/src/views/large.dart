@@ -15,6 +15,7 @@ class DevicePreviewLargeLayout extends StatefulWidget {
     this.enableQuickDevicesTools = false,
     this.showToast = false,
     this.showThemeToggle = true,
+    this.showOrientationToggle = true,
   });
 
   /// The sections containing the tools.
@@ -33,6 +34,9 @@ class DevicePreviewLargeLayout extends StatefulWidget {
   /// Shows a theme toggle button in the toolbar.
   final bool showThemeToggle;
 
+  /// Whether to show the orientation toggle button in the toolbar.
+  final bool showOrientationToggle;
+
   @override
   DevicePreviewLargeLayoutState createState() =>
       DevicePreviewLargeLayoutState();
@@ -41,7 +45,7 @@ class DevicePreviewLargeLayout extends StatefulWidget {
 class DevicePreviewLargeLayoutState extends State<DevicePreviewLargeLayout> {
   @override
   void initState() {
-    // Forcing rebuild to update absolute postion in `_overlayKey`
+    // Forcing rebuild to update absolute position in `_overlayKey`
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) => setState(() {}),
     );
@@ -82,6 +86,7 @@ class DevicePreviewLargeLayoutState extends State<DevicePreviewLargeLayout> {
                       return [
                         MaterialPageRoute(
                           builder: (context) => ToolPanel(
+                            showOrientationToggle: widget.showOrientationToggle,
                             slivers: widget.slivers,
                             quickDevices: widget.quickDevices,
                             enableQuickDevicesTools:

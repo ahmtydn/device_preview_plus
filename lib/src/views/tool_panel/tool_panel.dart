@@ -33,6 +33,7 @@ class ToolPanel extends StatelessWidget {
     this.isModal = false,
     this.quickDevices = const [],
     this.enableQuickDevicesTools = false,
+    this.showOrientationToggle = true,
     this.showToast = false,
     this.showThemeToggle = true,
   });
@@ -77,6 +78,9 @@ class ToolPanel extends StatelessWidget {
   /// when displayed as a sidebar.
   static const double panelWidth = 320;
 
+  /// Whether to show the orientation toggle button.
+  final bool showOrientationToggle;
+
   @override
   Widget build(BuildContext context) {
     final rootContext = context;
@@ -96,6 +100,7 @@ class ToolPanel extends StatelessWidget {
                   quickDevices: quickDevices,
                   enableQuickDevicesTools: enableQuickDevicesTools,
                   showToast: showToast,
+                  showOrientationToggle: showOrientationToggle,
                   showThemeToggle: showThemeToggle,
                   onClose: () {
                     Navigator.maybePop(rootContext);

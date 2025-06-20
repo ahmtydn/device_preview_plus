@@ -31,6 +31,7 @@ class ToolPanelWidget extends StatelessWidget {
     required this.quickDevices,
     required this.enableQuickDevicesTools,
     required this.showToast,
+    this.showOrientationToggle = true,
     this.showThemeToggle = true,
   });
 
@@ -61,6 +62,9 @@ class ToolPanelWidget extends StatelessWidget {
 
   /// Whether to show the theme toggle button.
   final bool showThemeToggle;
+
+  /// Whether to show the orientation toggle button.
+  final bool showOrientationToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -121,6 +125,7 @@ class ToolPanelWidget extends StatelessWidget {
                     quickDevices: quickDevices,
                     showToast: showToast,
                     showThemeToggle: showThemeToggle,
+                    showOrientationToggle: showOrientationToggle,
                     onDeviceSelected: (device) {
                       final state = context.read<DevicePreviewStore>();
                       state.selectDevice(device.identifier);
