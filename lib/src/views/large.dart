@@ -13,7 +13,7 @@ class DevicePreviewLargeLayout extends StatefulWidget {
     this.quickDevices = const [],
     required this.slivers,
     this.enableQuickDevicesTools = false,
-    this.showDeviceToast = false,
+    this.showToast = false,
     this.showThemeToggle = true,
   });
 
@@ -28,7 +28,7 @@ class DevicePreviewLargeLayout extends StatefulWidget {
   final bool enableQuickDevicesTools;
 
   /// Shows a toast message when a device is selected instead of tooltip.
-  final bool showDeviceToast;
+  final bool showToast;
 
   /// Shows a theme toggle button in the toolbar.
   final bool showThemeToggle;
@@ -86,7 +86,7 @@ class DevicePreviewLargeLayoutState extends State<DevicePreviewLargeLayout> {
                             quickDevices: widget.quickDevices,
                             enableQuickDevicesTools:
                                 widget.enableQuickDevicesTools,
-                            showDeviceToast: widget.showDeviceToast,
+                            showToast: widget.showToast,
                             showThemeToggle: widget.showThemeToggle,
                           ),
                         ),

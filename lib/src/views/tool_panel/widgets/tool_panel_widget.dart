@@ -30,7 +30,7 @@ class ToolPanelWidget extends StatelessWidget {
     required this.sections,
     required this.quickDevices,
     required this.enableQuickDevicesTools,
-    required this.showDeviceToast,
+    required this.showToast,
     this.showThemeToggle = true,
   });
 
@@ -57,7 +57,7 @@ class ToolPanelWidget extends StatelessWidget {
   final bool enableQuickDevicesTools;
 
   /// Whether to show toast messages when devices are selected.
-  final bool showDeviceToast;
+  final bool showToast;
 
   /// Whether to show the theme toggle button.
   final bool showThemeToggle;
@@ -119,7 +119,7 @@ class ToolPanelWidget extends StatelessWidget {
                 ? CompactQuickDevicesView(
                     key: const ValueKey('quickDevicesView'),
                     quickDevices: quickDevices,
-                    showDeviceToast: showDeviceToast,
+                    showToast: showToast,
                     showThemeToggle: showThemeToggle,
                     onDeviceSelected: (device) {
                       final state = context.read<DevicePreviewStore>();

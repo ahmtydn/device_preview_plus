@@ -20,7 +20,7 @@ This release introduces significant improvements and new features to the `device
 
 #### 3. Enhanced Configuration Options
 - `enableQuickDevicesTools`: Enable quick device tools
-- `showDeviceToast`: Device selection notifications
+- `showToast`: Device selection notifications
 - `showThemeToggle`: Theme toggle button visibility
 - ScaffoldMessenger integration for global access
 
@@ -51,7 +51,7 @@ This release introduces significant improvements and new features to the `device
 DevicePreview(
   enabled: true,
   enableQuickDevicesTools: true,
-  showDeviceToast: true,
+  showToast: true,
   showThemeToggle: true,
   onThemeChanged: (isDark) {
     print('Theme changed to: ${isDark ? 'Dark' : 'Light'}');
@@ -69,7 +69,7 @@ DevicePreview(
 DevicePreview(
   enabled: true,
   enableQuickDevicesTools: true, // Quick device tools
-  showDeviceToast: true,         // Toast notifications
+  showToast: true,         // Toast notifications
   showThemeToggle: true,         // Theme toggle button
   initialDarkMode: false,        // Initial theme setting
   onThemeChanged: handleThemeChange,

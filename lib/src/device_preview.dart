@@ -50,7 +50,7 @@ class DevicePreview extends StatefulWidget {
     this.enabled = true,
     this.backgroundColor,
     this.enableQuickDevicesTools = false,
-    this.showDeviceToast = false,
+    this.showToast = false,
     this.showThemeToggle = true,
     this.onThemeChanged,
     this.initialDarkMode,
@@ -106,7 +106,7 @@ class DevicePreview extends StatefulWidget {
   ///
   /// When enabled, device selection will show a toast message with device information
   /// instead of displaying tooltip on hover.
-  final bool showDeviceToast;
+  final bool showToast;
 
   /// Shows a theme toggle icon in the toolbar.
   ///
@@ -659,7 +659,7 @@ class DevicePreviewWidgetState extends State<DevicePreview> {
                                 quickDevices: widget.quickDevices,
                                 enableQuickDevicesTools:
                                     widget.enableQuickDevicesTools,
-                                showDeviceToast: widget.showDeviceToast,
+                                showToast: widget.showToast,
                                 showThemeToggle: widget.showThemeToggle,
                               ),
                             ),

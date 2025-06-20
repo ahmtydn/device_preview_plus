@@ -33,7 +33,7 @@ class ToolPanel extends StatelessWidget {
     this.isModal = false,
     this.quickDevices = const [],
     this.enableQuickDevicesTools = false,
-    this.showDeviceToast = false,
+    this.showToast = false,
     this.showThemeToggle = true,
   });
 
@@ -63,7 +63,7 @@ class ToolPanel extends StatelessWidget {
   ///
   /// When enabled, device selection will show a toast message with device
   /// information instead of displaying tooltip on hover.
-  final bool showDeviceToast;
+  final bool showToast;
 
   /// Shows a theme toggle button in the toolbar.
   ///
@@ -95,7 +95,7 @@ class ToolPanel extends StatelessWidget {
                   isModal: isModal,
                   quickDevices: quickDevices,
                   enableQuickDevicesTools: enableQuickDevicesTools,
-                  showDeviceToast: showDeviceToast,
+                  showToast: showToast,
                   showThemeToggle: showThemeToggle,
                   onClose: () {
                     Navigator.maybePop(rootContext);

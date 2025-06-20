@@ -21,7 +21,8 @@ class CompactQuickDevicesView extends StatelessWidget {
   /// ```dart
   /// CompactQuickDevicesView(
   ///   quickDevices: [Devices.ios.iPhone13, Devices.android.pixel5],
-  ///   showDeviceToast: true,
+  ///   showToast: true,
+  ///   showOrientationToggle: true,
   ///   onDeviceSelected: (device) {
   ///     // Handle device selection
   ///   },
@@ -31,8 +32,9 @@ class CompactQuickDevicesView extends StatelessWidget {
     super.key,
     required this.quickDevices,
     required this.onDeviceSelected,
-    this.showDeviceToast = false,
+    this.showToast = false,
     this.showThemeToggle = true,
+    this.showOrientationToggle = false,
   });
 
   /// The list of quick devices to display.
@@ -51,13 +53,20 @@ class CompactQuickDevicesView extends StatelessWidget {
   ///
   /// When true, selecting a device will display a [SnackBar] with
   /// device information instead of showing a tooltip on hover.
-  final bool showDeviceToast;
+  final bool showToast;
 
   /// Shows a theme toggle button above the "No Device" option.
   ///
   /// When true, displays a theme toggle icon that allows quick switching
   /// between dark and light themes.
   final bool showThemeToggle;
+
+  /// Shows an orientation toggle button for rotating the device.
+  ///
+  /// When true, displays an orientation toggle icon that allows quick switching
+  /// between portrait and landscape orientations. Only visible when a device
+  /// that supports rotation is selected.
+  final bool showOrientationToggle;
 
   /// Shows a toast message with device information.
   ///
@@ -135,7 +144,7 @@ class CompactQuickDevicesView extends StatelessWidget {
                           state.data = state.data.copyWith(
                             quickDeviceTools: false,
                           );
-                          if (showDeviceToast) {
+                          if (showToast) {
                             _showDeviceToast(context, 'No Device');
                           }
                         },
@@ -168,7 +177,7 @@ class CompactQuickDevicesView extends StatelessWidget {
                               state.data = state.data.copyWith(
                                 quickDeviceTools: true,
                               );
-                              if (showDeviceToast) {
+                              if (showToast) {
                                 _showDeviceToast(
                                   context,
                                   '${device.name} (${device.identifier.name})',
@@ -181,6 +190,43 @@ class CompactQuickDevicesView extends StatelessWidget {
                       const SizedBox(height: 8),
                     ],
                   ),
+                  // Orientation toggle (if enabled and device supports it)
+                  if (showOrientationToggle) ...[
+                    Builder(
+                      builder: (context) {
+                        final currentDevice = context.select(
+                          (DevicePreviewStore store) => store.deviceInfo,
+                        );
+                        final orientation = context.select(
+                          (DevicePreviewStore store) => store.data.orientation,
+                        );
+                        final canRotate =
+                            currentDevice.rotatedSafeAreas != null;
+
+                        if (!canRotate) {
+                          return const SizedBox.shrink();
+                        }
+
+                        return CompactDeviceIcon(
+                          icon: orientation == Orientation.portrait
+                              ? CupertinoIcons.rotate_right
+                              : CupertinoIcons.rotate_left,
+                          isSelected: false,
+                          onTap: () {
+                            final state = context.read<DevicePreviewStore>();
+                            state.rotate();
+                            if (showToast) {
+                              _showDeviceToast(
+                                context,
+                                'Orientation: ${orientation == Orientation.portrait ? 'Landscape' : 'Portrait'}',
+                              );
+                            }
+                          },
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                  ],
                 ],
               ),
             ],
