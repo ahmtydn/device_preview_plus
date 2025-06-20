@@ -153,6 +153,7 @@ class CompactQuickDevicesView extends StatelessWidget {
                   ),
                   // Orientation toggle (if enabled and device supports it)
                   if (showOrientationToggle) ...[
+                    const SizedBox(height: 8),
                     Builder(
                       builder: (context) {
                         final currentDevice = context.select(
