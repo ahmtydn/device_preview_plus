@@ -11,6 +11,9 @@ void main() {
       enabled: true,
       enableQuickDevicesTools: true,
       tools: const [...DevicePreview.defaultTools, CustomPlugin()],
+      quickDevices: [
+        Devices.ios.iPhone13,
+      ],
       builder: (context) => const BasicApp(),
     ),
   );

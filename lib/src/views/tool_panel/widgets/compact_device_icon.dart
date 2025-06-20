@@ -63,11 +63,9 @@ class CompactDeviceIcon extends StatelessWidget {
     final theme = Theme.of(context);
 
     return AnimatedContainer(
-      duration: duration ?? const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
       width: 40,
       height: 40,
-      alignment: transformAlignment,
-      transform: transform,
       decoration: BoxDecoration(
         color: isSelected
             ? theme.colorScheme.primary.withOpacity(0.1)
@@ -80,17 +78,37 @@ class CompactDeviceIcon extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(8),
-          child: Icon(
-            icon,
-            size: 20,
-            color: isSelected
-                ? theme.colorScheme.primary
-                : theme.colorScheme.onSurface.withOpacity(0.7),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(8),
+            child: Center(
+              child: transform != null
+                  ? AnimatedContainer(
+                      duration: duration ?? const Duration(milliseconds: 200),
+                      child: Transform(
+                        alignment: transformAlignment ?? Alignment.center,
+                        transform: transform!,
+                        child: Icon(
+                          icon,
+                          size: 20,
+                          color: isSelected
+                              ? theme.colorScheme.primary
+                              : theme.colorScheme.onSurface.withOpacity(0.7),
+                        ),
+                      ),
+                    )
+                  : Icon(
+                      icon,
+                      size: 20,
+                      color: isSelected
+                          ? theme.colorScheme.primary
+                          : theme.colorScheme.onSurface.withOpacity(0.7),
+                    ),
+            ),
           ),
         ),
       ),
